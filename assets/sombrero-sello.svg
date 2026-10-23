@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 155" role="img" aria-labelledby="title desc">
+<title id="title">Sombrero vueltiao</title><desc id="desc">Sombrero vueltiao tejido tradicional, símbolo de nuestras raíces sabaneras</desc>
+<defs>
+<linearGradient id="paja" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2cb"/><stop offset=".58" stop-color="#e1ca96"/><stop offset="1" stop-color="#b99556"/></linearGradient>
+<linearGradient id="metal" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff1be"/><stop offset=".55" stop-color="#cda764"/><stop offset="1" stop-color="#8c612e"/></linearGradient>
+<pattern id="tejido" width="23" height="18" patternUnits="userSpaceOnUse"><rect width="23" height="18" fill="#2f2a25"/><path d="M0 9L11.5 1L23 9L11.5 17Z" stroke="#f7e7bf" stroke-width="2.4" fill="none"/><path d="M11.5 3L11.5 15 M1 9H22" stroke="#e3cd9e" stroke-width=".75"/></pattern>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="2" dy="6" stdDeviation="3" flood-color="#321a1b" flood-opacity=".35"/></filter>
+</defs>
+<g stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)">
+<path d="M7 102Q24 81 65 76Q139 67 191 85Q228 92 232 105Q210 129 152 137Q87 146 33 126Q8 117 7 102Z" fill="url(#paja)" stroke="#ba8e4c" stroke-width="3"/>
+<path d="M15 108Q113 146 223 110" fill="none" stroke="#24221f" stroke-width="9"/>
+<path d="M19 114Q123 150 222 113" stroke="#f8e8be" stroke-width="3" fill="none"/>
+<path d="M60 94Q64 51 82 27Q119 9 156 28Q177 49 182 95Q124 116 60 94Z" fill="url(#paja)" stroke="#c49854" stroke-width="2.4"/>
+<path d="M66 54Q125 76 175 57L182 94Q122 114 60 93Z" fill="url(#tejido)" stroke="#d5b879" stroke-width="1.6"/>
+<path d="M64 93Q116 115 184 94" stroke="#f4e4b2" stroke-width="5" fill="none"/>
+<path d="M79 31Q122 13 157 32" fill="none" stroke="#342f26" stroke-width="6"/>
+<path d="M85 27Q122 17 151 28" stroke="#e1ca9a" stroke-width="2" fill="none"/>
+<path d="M73 100Q111 117 172 105" stroke="#322b24" stroke-width="2" fill="none"/>
+<path d="M31 106Q109 135 213 104" stroke="url(#metal)" stroke-width="1.5" fill="none"/>
+</g>
+</svg>
