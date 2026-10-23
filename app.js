@@ -36,7 +36,14 @@
     if (!audio) return;
     if (audio.readyState === 0) audio.load();
     try {
-      if (audio.currentTime < 1) audio.currentTime = 92;
+      // La duración del MP3 puede no estar disponible al abrir: esperar metadatos para buscar 1:32.
+      if (audio.readyState >= 1) {
+        try { if (audio.currentTime < 1 && audio.duration > 93) audio.currentTime = 92; } catch {}
+      } else {
+        audio.addEventListener("loadedmetadata", () => {
+          try { if (audio.currentTime < 1 && audio.duration > 93) audio.currentTime = 92; } catch {}
+        }, { once:true });
+      }
       await audio.play();
       if (musicButton) musicButton.setAttribute("aria-pressed", "true");
       if (musicLabel) musicLabel.textContent = "Pausar música";
