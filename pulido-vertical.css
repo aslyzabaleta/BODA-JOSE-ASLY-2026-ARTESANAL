@@ -1,0 +1,211 @@
+/* INVITACIÓN 2 · revisión integral 2026-10-23.
+   Diseñada primero para teléfono vertical. 2D, papeles con fibra visible,
+   composiciones legibles, movimientos que acompañan la lectura.
+   El borgoña predomina SOLO en el sobre. */
+:root{--foil:#b58b50;--foil-hi:#e3c58c}
+
+/* Papeles y fondos artesanales: fibras legibles, contrastes suaves. */
+.scene:not(.scene-cover)::before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.44;
+ background-image:repeating-linear-gradient(13deg,rgba(124,88,49,.04) 0 .8px,transparent .8px 7px),repeating-linear-gradient(101deg,rgba(255,255,255,.16) 0 .8px,transparent .8px 11px),radial-gradient(circle at 2px 2px,rgba(133,108,79,.10) .45px,transparent 1px);
+ background-size:auto,auto,9px 9px;
+}
+.paper,.paper-strip,.place-note.paper-place,.photo-mat,.polaroid,.floating-letter,.under-card,.reserved-note,.rsvp-paper,.gift-envelope,.env-letter{
+ background-image:radial-gradient(ellipse at 21% 18%,rgba(255,255,255,.62),transparent 70%),repeating-linear-gradient(23deg,rgba(142,98,54,.03) 0 .6px,transparent .6px 5px),repeating-linear-gradient(102deg,rgba(112,85,58,.04) 0 .7px,transparent .7px 9px),linear-gradient(142deg,#fffdf7,#f8eddf 63%,#ecdbc4);
+ background-blend-mode:normal;
+}
+/* Capitulación verdaderamente mayúscula de Jose; nada parece 'jose'. */
+.couple-script,.letter-names,.intro-signature,.finale-content h2{
+ font-family:'Cormorant Garamond',Georgia,serif!important;
+ font-weight:500!important;font-style:normal!important;letter-spacing:-.045em;
+ text-transform:none;line-height:1.05;
+}
+.couple-script{font-size:clamp(63px,8vw,104px);margin:10px 0 4px}
+.couple-script>span,.finale-content h2 span,.intro-signature i{
+ font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:400!important;font-style:italic!important;
+}
+.cover-title-wrap{transition:opacity .6s ease,transform .7s ease;will-change:opacity,transform;z-index:4}
+.scene-cover.is-photo-open .cover-title-wrap{opacity:0;transform:translateY(-31px);pointer-events:none}
+.cover-composition{isolation:isolate}
+.envelope-surround{z-index:5}
+.envelope{isolation:isolate}
+
+/* Sobre borgoña con textura de lino/cartulina visible y ribetes dorados. */
+.env-back,.env-front,.env-fold-top{
+ background-color:#713047!important;
+ background-image:radial-gradient(ellipse at 17% 15%,rgba(246,202,167,.20),transparent 52%),
+ radial-gradient(ellipse at 77% 86%,rgba(29,8,22,.40),transparent 59%),
+ repeating-linear-gradient(93deg,rgba(255,237,203,.075) 0 1px,transparent 1px 4px),
+ repeating-linear-gradient(3deg,rgba(34,10,17,.075) 0 .8px,transparent .8px 4px),
+ linear-gradient(134deg,#924a62 0%,#77344d 44%,#581f36 100%)!important;
+ background-blend-mode:normal;filter:none;
+}
+.env-back{border:1.5px solid rgba(224,182,110,.8);box-shadow:inset 0 0 0 5px rgba(240,199,137,.09)}
+/* La tapa y el cuerpo coinciden EXACTAMENTE: nada de huecos o triángulos blancos. */
+.env-front{clip-path:polygon(0 0,50% 65%,100% 0,100% 100%,0 100%);z-index:5}
+.env-fold-top{clip-path:polygon(0 0,100% 0,50% 65%);z-index:6;transform-origin:center top}
+.env-front::after{
+ background:linear-gradient(29deg,transparent 49.7%,rgba(220,171,107,.47) 50%,transparent 50.28%),
+ linear-gradient(-29deg,transparent 49.7%,rgba(220,171,107,.47) 50%,transparent 50.28%)!important;
+ opacity:.62;
+}
+.env-front::before,.env-fold-top::before{opacity:.75!important}
+.env-fold-top::after{
+ content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;
+ background:linear-gradient(153deg,transparent 49.8%,rgba(235,195,123,.8) 50%,transparent 50.35%)
+}
+/* La fotografía no sale por los costados mientras el sobre esté cerrado. */
+.env-letter{
+ z-index:4;opacity:0;top:-3%;left:9%;width:82%;height:141%;
+ display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+ gap:8px;padding:14px 12px 11px;
+ border:8px solid #fff9ec;outline:1px solid #cda86b;overflow:hidden;
+ box-shadow:1px 5px 0 #d7bd9770,0 16px 28px #3f1b2433;
+ transition:transform 1.25s cubic-bezier(.18,.69,.18,1),opacity .22s ease .18s;
+}
+.env-letter::before{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid rgba(197,154,91,.5)}
+.env-letter img{
+ order:1;margin:3px 0 2px;width:96%;height:69%;object-fit:contain;flex:none;
+ background:#f1e8db;border:1px solid #d2b78d;box-shadow:0 4px 8px rgba(95,71,43,.12);
+}
+.env-letter .letter-caption{
+ order:2;margin-top:0;color:#866438;font-size:9px;letter-spacing:.16em;
+ text-align:center;line-height:1.2;
+}
+.env-letter .letter-corner{order:3;font-size:9px;letter-spacing:.22em;color:#866438;margin-top:2px}
+.env-letter .letter-gold-rule,.env-letter .letter-names{display:none}
+.envelope.is-open .env-letter{opacity:1;transform:translateY(-165px) rotate(-1.8deg);z-index:4}
+.envelope.is-open .env-fold-top{z-index:1;transform:rotateX(179deg)}
+/* Se retiró el sombrerito de la portada: sello en oro delicado. */
+.wax-stamp.refined-seal{
+ z-index:7;top:64%;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;
+ border:2px solid #d7ae70;
+ background:radial-gradient(circle at 28% 25%,#ffeec5,#d1a65f 61%,#936834);
+ box-shadow:inset 0 0 0 5px rgba(255,240,201,.66),
+ inset 0 0 0 7px rgba(140,102,51,.39),0 6px 13px rgba(36,12,21,.35);
+ filter:none;
+}
+.wax-stamp.refined-seal span{color:#785329;font:500 23px/1 'Cormorant Garamond',Georgia,serif}
+.wax-stamp.refined-seal i{font:italic 13px 'Cormorant Garamond',Georgia,serif}
+.envelope.is-open .wax-stamp.refined-seal{opacity:0;transform:translate(-50%,-50%) scale(.55)}
+/* Avance automático una vez que se vea la foto; sin segundo clic. */
+.scene-cover.is-photo-open .open-button{
+ opacity:0;pointer-events:none;transform:translateY(9px);
+ transition:opacity .5s ease,transform .5s ease;
+}
+.scene-cover.is-photo-open .open-hint{opacity:0;transition:opacity .4s ease}
+/* Las cartas NO flotan eternamente mientras alguien intenta leer. */
+.story-letter-shell,.polaroid,.places-grid,.intro-sheet-wrap,.end-shadow{animation:none!important}
+@media(prefers-reduced-motion:no-preference){
+ body.motion-ready .motion-piece{
+  opacity:0;translate:0 25px;transition:opacity .75s ease,
+  translate .85s cubic-bezier(.2,.7,.2,1);
+  transition-delay:var(--motion-delay,0ms);
+ }
+ body.motion-ready .motion-piece.is-visible{opacity:1;translate:0 0}
+ .cayena:not(.motion-piece){animation:softFloral 9s ease-in-out infinite alternate}
+ @keyframes softFloral{to{filter:drop-shadow(4px 12px 13px rgba(80,55,48,.18)) brightness(1.015)}}
+}
+/* Espacio para segunda fotografía, flor fuera de ella. */
+.scene-story{min-height:975px}
+.story-stage{min-height:810px}
+.polaroid-pending{top:533px;right:1%;width:30%}
+.story-bouquet{
+ left:3%;right:auto;bottom:-48px;transform:rotate(-7deg);
+ z-index:2;width:164px;
+}
+/* Tarjetas de lugares distintas y cayena fuera de las fotografías. */
+.places-grid{padding-bottom:100px}
+.places-bouquet{
+ left:50%!important;right:auto!important;top:auto!important;bottom:-70px!important;
+ transform:translateX(-50%) rotate(-10deg)!important;width:145px!important;z-index:3;opacity:.9;
+}
+/* Una tira de papel con fibras, mismo versículo sin cambios. */
+.paper-strip{
+ background-image:radial-gradient(circle at 26% 18%,rgba(255,255,255,.65),transparent 58%),
+ repeating-linear-gradient(115deg,rgba(156,115,62,.052) 0 .8px,transparent .8px 7px),
+ repeating-linear-gradient(13deg,rgba(152,111,77,.037) 0 .7px,transparent .7px 8px),
+ linear-gradient(143deg,#fffdf6,#f7e8d7 71%,#e7cfb1);
+}
+.paper-strip-shadow{
+ filter:drop-shadow(4px 9px 0 rgba(189,158,117,.25))
+ drop-shadow(0 15px 19px rgba(84,59,39,.2));
+}
+/* Vertical primero: cada pieza tiene su espacio en pantallas 360–430px. */
+@media(max-width:800px){
+ .scene-cover{min-height:100svh;padding:18px 12px 19px}
+ .cover-title-wrap{margin-top:19px}
+ .cover-title{font-size:clamp(35px,9vw,48px)}
+ .couple-script{font-size:clamp(53px,13vw,77px);margin:7px 0 7px;line-height:1}
+ .cover-composition{height:clamp(295px,87vw,363px);margin-top:12px}
+ .envelope-surround{width:min(360px,78vw);top:clamp(69px,20vw,98px)}
+ .env-letter{border-width:6px;padding:9px 8px 7px;gap:4px;left:9%;width:82%;height:141%}
+ .env-letter img{height:70%;width:98%}
+ .env-letter .letter-caption{font-size:clamp(7px,1.8vw,9px)}
+ .env-letter .letter-corner{font-size:clamp(7px,1.9vw,9px)}
+ .envelope.is-open .env-letter{transform:translateY(-115px) rotate(-1.5deg)}
+ .wax-stamp.refined-seal{height:48px;width:48px}
+ .wax-stamp.refined-seal span{font-size:18px}
+ .floating-letter-left,.floating-letter-right{display:none}
+ .cayena-cover-left{left:-37px;top:88px;width:clamp(125px,32vw,163px);z-index:3}
+ .cayena-cover-right{right:-40px;top:123px;width:clamp(122px,31vw,164px);z-index:3}
+ .cover-bottom{margin-top:auto;padding-top:13px}
+ .scene-story{min-height:0!important;padding:75px 13px 85px!important}
+ .story-stage{
+  display:flex;flex-direction:column;align-items:center;gap:27px;
+  min-height:0!important;width:100%;
+ }
+ .story-letter-shell{
+  position:relative;left:auto;right:auto;top:auto;bottom:auto;
+  width:min(95%,420px);margin:0 auto;transform:rotate(-1deg);
+ }
+ .story-letter{padding:52px 10% 56px;min-height:auto}
+ .polaroid,.polaroid-pending{
+  position:relative;top:auto;bottom:auto;left:auto;right:auto;
+  margin:0;width:min(82%,328px);max-width:328px;transform:rotate(3deg);
+  padding:13px 13px 22px;
+ }
+ .polaroid img{height:clamp(235px,71vw,318px);width:100%;object-fit:contain}
+ .polaroid figcaption{
+  font-size:clamp(24px,7vw,30px);line-height:1.1;margin-top:10px;
+ }
+ .polaroid-pending{transform:rotate(-3deg)}
+ .polaroid-pending .pending-photo{height:clamp(190px,52vw,245px);font-size:24px}
+ .polaroid-pending figcaption{font-size:23px}
+ .story-bouquet{
+  position:relative;order:5;left:auto;right:auto;top:auto;bottom:auto;
+  margin:-4px 0 -21px auto;width:123px;transform:rotate(-13deg);
+  opacity:.88;z-index:2;
+ }
+ .places-grid{
+  display:flex;flex-direction:column;align-items:center;gap:24px;padding-bottom:16px;
+ }
+ .place-note.paper-place{width:min(94%,370px);min-height:0}
+ .paper-place-church{transform:rotate(-2deg)}
+ .paper-place-reception{transform:rotate(2deg)}
+ .places-bouquet{
+  position:relative!important;left:auto!important;right:auto!important;
+  top:auto!important;bottom:auto!important;
+  margin:-24px 0 -24px auto;width:128px!important;
+  transform:rotate(-15deg)!important;align-self:flex-end;z-index:3;
+ }
+ .scene-places{padding:72px 10px 92px}
+ .places-stage>.editorial-title{font-size:clamp(39px,10vw,52px)}
+ .place-note h3{font-size:clamp(31px,8vw,37px)}
+ .music-control{right:12px;bottom:12px}
+}
+@media(max-width:390px){
+ .cover-title-wrap{margin-top:12px}
+ .couple-script{font-size:54px}
+ .cover-composition{height:290px}
+ .envelope-surround{width:82vw;top:74px}
+ .envelope.is-open .env-letter{transform:translateY(-106px) rotate(-1.5deg)}
+ .cayena-cover-left{left:-48px;top:97px;width:125px}
+ .cayena-cover-right{right:-45px;top:119px;width:125px}
+ .story-letter{padding:46px 10% 51px}
+ .story-letter p:not(.eyebrow){font-size:21px}
+ .polaroid,.polaroid-pending{width:86%}
+}
+@media(prefers-reduced-motion:reduce){
+ body.motion-ready .motion-piece{opacity:1;translate:none;transition:none}
+}
