@@ -209,3 +209,23 @@
 @media(prefers-reduced-motion:reduce){
  body.motion-ready .motion-piece{opacity:1;translate:none;transition:none}
 }
+
+/* TEXTURA VISIBLE: papel borgoña de fibra, no un simple degradado. */
+.env-back,.env-front,.env-fold-top{
+ background-image:
+  radial-gradient(ellipse at 18% 14%,rgba(255,226,194,.17),transparent 43%),
+  radial-gradient(ellipse at 82% 85%,rgba(25,5,15,.32),transparent 56%),
+  repeating-linear-gradient(0deg,rgba(255,235,207,.12) 0 1px,transparent 1px 3px),
+  repeating-linear-gradient(90deg,rgba(26,6,15,.11) 0 1px,transparent 1px 3px),
+  repeating-linear-gradient(43deg,rgba(255,237,211,.065) 0 1px,transparent 1px 5px),
+  linear-gradient(134deg,#924a62 0%,#77344d 44%,#581f36 100%)!important;
+}
+.env-back::before,.env-front::before,.env-fold-top::before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='fiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.42 .88' numOctaves='4' seed='17' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fiber)' opacity='.8'/%3E%3C/svg%3E")!important;
+ mix-blend-mode:soft-light!important;opacity:.95!important;
+}
+.env-back::after{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+ background-image:repeating-linear-gradient(12deg,transparent 0 7px,rgba(255,241,219,.12) 7px 7.7px,transparent 7.7px 16px),repeating-linear-gradient(97deg,transparent 0 12px,rgba(26,5,16,.10) 12px 12.8px,transparent 12.8px 25px),radial-gradient(circle at 2px 2px,rgba(255,238,210,.18) .7px,transparent 1.7px);
+ background-size:auto,auto,7px 7px;opacity:.8;mix-blend-mode:soft-light;
+}
