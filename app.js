@@ -34,18 +34,37 @@
   refreshCountdown();
   window.setInterval(refreshCountdown,1000);
 
-  async function playMusic(){
-    if(!audio)return;
-    try{
-      /* Reproducir directamente desde el gesto del usuario para evitar que load() interrumpa el inicio en móviles. */
-      if(audio.ended)audio.currentTime=0;
-      await audio.play();
-      musicButton?.setAttribute("aria-pressed","true");
-      if(musicLabel)musicLabel.textContent="Pausar música";
-    }catch{
-      musicButton?.setAttribute("aria-pressed","false");
-      if(musicLabel)musicLabel.textContent="Activar música";
+  /* Mismo comportamiento musical que la Invitación 1:
+     Amor y Sentimiento desde 1:32 al abrir, con pausa/reanudación y repetición. */
+  const musicStart=92;
+  function seekMusicStart(){
+    if(!audio || audio.readyState<1)return;
+    const target=Number.isFinite(audio.duration)
+      ? Math.min(musicStart,Math.max(0,audio.duration-.25)) : musicStart;
+    if(Math.abs(audio.currentTime-target)<.15)return;
+    try{audio.currentTime=target;}catch(err){
+      console.warn("No se pudo establecer el inicio musical:",err);
     }
+  }
+  if(audio){
+    audio.preload="metadata";
+    audio.addEventListener("loadedmetadata",seekMusicStart);
+    audio.load();
+  }
+  function setMusicButton(){
+    if(!audio)return;
+    const playing=!audio.paused;
+    musicButton?.setAttribute("aria-pressed",String(playing));
+    musicButton?.setAttribute("aria-label",playing?"Pausar música":"Reproducir música");
+    if(musicLabel)musicLabel.textContent=playing?"Pausar música":"Reproducir música";
+  }
+  function playMusic(){
+    if(!audio)return;
+    seekMusicStart();
+    audio.play().then(setMusicButton).catch(()=>{
+      setMusicButton();
+      console.warn("El navegador requiere pulsar Reproducir música para activar el audio.");
+    });
   }
 
   /* Revelar por desplazamiento, sin alterar las posiciones de papeles y fotos. */
@@ -112,23 +131,23 @@
     },{once:true});
   }
 
-  musicButton?.addEventListener("click",async()=>{
+  musicButton?.addEventListener("click",()=>{
     if(!audio)return;
-    if(!audio.paused){
-      audio.pause();
-      musicButton.setAttribute("aria-pressed","false");
-      if(musicLabel)musicLabel.textContent="Activar música";
+    if(audio.paused){
+      if(audio.ended)seekMusicStart();
+      playMusic();
     }else{
-      await playMusic();
+      audio.pause();
+      setMusicButton();
     }
   });
   audio?.addEventListener("ended",()=>{
-    musicButton?.setAttribute("aria-pressed","false");
-    if(musicLabel)musicLabel.textContent="Volver a escuchar";
+    seekMusicStart();
+    audio.play().then(setMusicButton).catch(setMusicButton);
   });
   audio?.addEventListener("error",()=>{
-    musicButton?.setAttribute("aria-pressed","false");
-    if(musicLabel)musicLabel.textContent="Música no disponible";
+    setMusicButton();
+    console.warn("No se pudo cargar la canción de la Invitación 1.");
   });
 
   /* Enlaces profundos no deben saltarse la apertura del sobre. */
