@@ -38,13 +38,8 @@
     if(!audio)return;
     try{
       if(audio.readyState===0)audio.load();
-      if(audio.readyState>=1){
-        try{if(audio.currentTime<1 && audio.duration>93)audio.currentTime=92;}catch{}
-      }else{
-        audio.addEventListener("loadedmetadata",()=>{
-          try{if(audio.currentTime<1 && audio.duration>93)audio.currentTime=92;}catch{}
-        },{once:true});
-      }
+      /* La música inicia desde el comienzo al abrir el sobre, no al cambiar de hoja. */
+      if(audio.currentTime!==0)audio.currentTime=0;
       await audio.play();
       musicButton?.setAttribute("aria-pressed","true");
       if(musicLabel)musicLabel.textContent="Pausar música";
