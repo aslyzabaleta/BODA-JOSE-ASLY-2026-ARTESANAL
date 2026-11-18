@@ -37,9 +37,8 @@
   async function playMusic(){
     if(!audio)return;
     try{
-      if(audio.readyState===0)audio.load();
-      /* La música inicia desde el comienzo al abrir el sobre, no al cambiar de hoja. */
-      if(audio.currentTime!==0)audio.currentTime=0;
+      /* Reproducir directamente desde el gesto del usuario para evitar que load() interrumpa el inicio en móviles. */
+      if(audio.ended)audio.currentTime=0;
       await audio.play();
       musicButton?.setAttribute("aria-pressed","true");
       if(musicLabel)musicLabel.textContent="Pausar música";
