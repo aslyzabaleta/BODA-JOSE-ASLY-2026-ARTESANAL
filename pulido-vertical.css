@@ -229,3 +229,18 @@
  background-image:repeating-linear-gradient(12deg,transparent 0 7px,rgba(255,241,219,.12) 7px 7.7px,transparent 7.7px 16px),repeating-linear-gradient(97deg,transparent 0 12px,rgba(26,5,16,.10) 12px 12.8px,transparent 12.8px 25px),radial-gradient(circle at 2px 2px,rgba(255,238,210,.18) .7px,transparent 1.7px);
  background-size:auto,auto,7px 7px;opacity:.8;mix-blend-mode:soft-light;
 }
+
+/* Ajuste cromático definitivo del sobre: borgoña/vinotinto real.
+   Se elimina el matiz rojo brillante y cualquier deriva ciruela/morada.
+   Mantiene la textura artesanal y los pliegues existentes. */
+.env-back,.env-front,.env-fold-top{
+  background-color:#451923!important;
+  background-image:
+    radial-gradient(ellipse at 18% 13%,rgba(221,177,145,.10),transparent 52%),
+    radial-gradient(ellipse at 78% 88%,rgba(15,3,7,.42),transparent 60%),
+    repeating-linear-gradient(93deg,rgba(242,220,197,.065) 0 .7px,transparent .7px 3.8px),
+    repeating-linear-gradient(4deg,rgba(20,5,9,.10) 0 .8px,transparent .8px 4.2px),
+    linear-gradient(132deg,#612936 0%,#4d1c29 43%,#38121d 100%)!important;
+  background-blend-mode:normal!important;
+  filter:none!important;
+}
