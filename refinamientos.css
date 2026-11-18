@@ -294,3 +294,27 @@
 @media(prefers-reduced-motion:reduce){
  .envelope.is-open .env-letter{transition:none}
 }
+
+
+/* Sobre borgoña: fibra de papel artesanal más táctil, sin brillo plástico. */
+.env-back,.env-front,.env-fold-top{
+  background-image:
+    radial-gradient(ellipse at 22% 16%,rgba(255,232,204,.13),transparent 42%),
+    radial-gradient(ellipse at 78% 81%,rgba(22,5,15,.27),transparent 55%),
+    repeating-linear-gradient(17deg,rgba(255,239,215,.045) 0 .45px,transparent .45px 3px),
+    repeating-linear-gradient(103deg,rgba(26,5,15,.055) 0 .55px,transparent .55px 4px),
+    repeating-linear-gradient(72deg,transparent 0 17px,rgba(255,231,197,.025) 17px 17.6px,transparent 17.6px 31px),
+    linear-gradient(126deg,#8a465d 0%,#743047 33%,#68283f 68%,#4e1d31 100%)!important;
+  background-blend-mode:normal,normal,normal,normal,normal,normal;
+}
+.env-back::before,.env-front::before,.env-fold-top::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' seed='27' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.48'/%3E%3C/svg%3E";
+  mix-blend-mode:soft-light;opacity:.72;
+}
+/* Fibras finas y variación de tono, visibles al acercarse pero delicadas. */
+.env-back::after,.env-fold-top::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(151deg,transparent 0 11px,rgba(255,236,206,.035) 11px 11.5px,transparent 11.5px 24px),repeating-linear-gradient(28deg,transparent 0 19px,rgba(30,7,17,.035) 19px 19.6px,transparent 19.6px 37px);
+  opacity:.72;mix-blend-mode:soft-light;
+}
+.env-front::after{z-index:1;}
